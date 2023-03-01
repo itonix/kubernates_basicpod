@@ -10,7 +10,7 @@ metadata:
     app: nginx
 spec:
   replicas: 3
-  MinReadySeconds: 10
+  minReadySeconds: 10
   selector:
     matchLabels:
       app: nginx
