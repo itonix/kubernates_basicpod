@@ -1,0 +1,40 @@
+---
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: nginxpods
+  labels:
+    app: webserver
+    taglabel: nginx_ubuntu_connection 
+
+spec:
+  # modify replicas according to your case
+  replicas: 3
+  selector:
+    matchLabels:
+      taglabel: nginx_ubuntu_connection
+  template:
+    metadata:
+      labels:
+        taglabel: nginx_ubuntu_connection
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+
+#SERVICE PART FOR CLUSTER IP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myclusterip
+spec:
+  selector:
+    taglabel: nginx_ubuntu_connection
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+
+
+
