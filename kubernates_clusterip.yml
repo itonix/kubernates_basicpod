@@ -8,13 +8,14 @@ metadata:
     taglabel: nginx_ubuntu_connection 
 
 spec:
-  # modify replicas according to your case
+  # pod template container
   replicas: 3
   selector:
     matchLabels:
       taglabel: nginx_ubuntu_connection
   template:
     metadata:
+      name: mynginxpods
       labels:
         taglabel: nginx_ubuntu_connection
     spec:
